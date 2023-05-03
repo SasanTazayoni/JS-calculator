@@ -18,6 +18,7 @@ numberBtns.forEach(btn => {
             currentInput.innerText = '';
         }
         addDigitToInput(digit);
+        btn.blur();
     });
 });
 
@@ -54,7 +55,7 @@ inverseSignBtn.addEventListener('click', () => {
     currentInput.innerText = -currentInputValue;
 });
 
-function operationClick(operation) {
+function operationExecute(operation) {
     if (currentInput.innerText === '' && prevInput.innerText === '') return;
     if (currentInput.innerText === '😑 Divide by zero...') return;
     if (currentInput.innerText && prevInput.innerText === '') {
@@ -88,23 +89,23 @@ function operationClick(operation) {
 }
 
 divideBtn.addEventListener('click', () => {
-    operationClick('/');
+    operationExecute('/');
 });
 
 multiplyBtn.addEventListener('click', () => {
-    operationClick('*');
+    operationExecute('*');
 });
 
 subtractBtn.addEventListener('click', () => {
-    operationClick('-');
+    operationExecute('-');
 });
 
 addBtn.addEventListener('click', () => {
-    operationClick('+');
+    operationExecute('+');
 });
 
 equalsBtn.addEventListener('click', () => {
-    operationClick('=');
+    operationExecute('=');
 });
 
 function calculate(largeScreenInput, smallScreenInput) {
@@ -139,3 +140,50 @@ function calculate(largeScreenInput, smallScreenInput) {
     prevInput.innerText = '';
     operator = null;
 }
+
+// Keyboard support
+
+document.addEventListener('keydown', e => {
+    const numbersArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'];
+    if (numbersArray.includes(e.key)) {
+        addDigitToInput(e.key);
+    }
+});
+
+document.addEventListener('keydown', e => {
+    const operatorsArray = ['+', '-', '*', '/'];
+    if (operatorsArray.includes(e.key)) {
+        operationExecute(e.key);
+    }
+});
+
+document.addEventListener('keyup', e => {
+    if (e.key === 'Enter') {
+        operationExecute('=');
+    }
+});
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        prevInput.innerText = '';
+        currentInput.innerText = '';
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    const key = e.key;
+    if (key === 'Backspace') {
+        let currentInputValue = currentInput.innerText;
+        if (currentInputValue === '') return;
+        if (currentInputValue === '😑 Divide by zero...') {
+            currentInputValue = '';
+        }
+    
+        const newInput = parseFloat(currentInputValue.slice(0, -1));
+        if (newInput === '-' || isNaN(newInput)) {
+            currentInput.innerText = '';
+        } else {
+            currentInput.innerText = newInput;
+        }
+    } 
+});
