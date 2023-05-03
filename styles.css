@@ -1,0 +1,90 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: linear-gradient(to left, lightskyblue, rgb(255, 215, 140));
+}
+
+.calculator {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.display {
+    align-items: flex-end;
+    background-color: lightgrey;
+    border: 5px solid rgb(49, 36, 36);
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    justify-content: space-around;
+    overflow: hidden;
+    padding: 10px;
+    width: 410px;
+}
+
+.display .prev-display {
+    opacity: 50%;
+    font-size: 1.5rem;
+}
+
+.display .current-display {
+    font-size: 2.5rem;
+}
+
+.buttons {
+    border: 5px solid rgb(49, 36, 36);
+    border-radius: 0 0 10px 10px;
+    border-top: 3px solid rgb(49, 36, 36);
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(5, 100px);
+}
+
+.buttons > button {
+    border: 1px solid rgb(255, 210, 210);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 2rem;
+    outline: none;
+}
+
+.special {
+    background-color: rgb(167, 167, 253);
+    transition: 0.2s;
+}
+
+.special:hover {
+    background-color: rgb(214, 214, 255);
+}
+
+.number {
+    background-color: rgb(148, 148, 148);
+    transition: 0.2s;
+}
+
+.number:hover {
+    background-color: rgb(211, 208, 208);
+}
+
+.operator {
+    background-color: orange;
+    transition: 0.2s;
+}
+
+.operator:hover {
+    background-color: rgb(255, 195, 82);
+}
+
+.span-two {
+    grid-column: span 2;
+}
