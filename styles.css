@@ -88,3 +88,11 @@ body {
 .span-two {
     grid-column: span 2;
 }
+
+footer {
+    background-color: darkblue;
+    color: white;
+    margin-top: auto;
+    padding: 10px 0;
+    text-align: center;
+}
